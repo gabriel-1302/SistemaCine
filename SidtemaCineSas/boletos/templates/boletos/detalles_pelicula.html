@@ -2,15 +2,86 @@
 <html>
 <head>
     <title>{{ pelicula.titulo }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        p {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        .movie-poster {
+            max-width: 300px; /* Limita el ancho máximo de la imagen */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ pelicula.titulo }}</h1>
-    <p>{{ pelicula.descripcion }}</p>
-    <h2>Funciones</h2>
-    <ul>
-        {% for funcion in funciones %}
-        <li><a href="{% url 'seleccionar_asiento' funcion.id %}">{{ funcion.horario }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        {% if pelicula.imagen %}
+        <img src="{{ pelicula.imagen.url }}" alt="{{ pelicula.titulo }}" class="movie-poster">
+        {% endif %}
+        <h1>{{ pelicula.titulo }}</h1>
+        <p>{{ pelicula.descripcion }}</p>
+        <h2>Funciones Disponibles</h2>
+        <ul>
+            {% for funcion in funciones %}
+            <li><a href="{% url 'seleccionar_asiento' funcion.id %}">{{ funcion.horario }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

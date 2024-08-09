@@ -3,10 +3,14 @@ from django.db import models
 # Create your models here.
 from django.db import models
 
+from django.db import models
+
 class Pelicula(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()
-    duracion = models.DurationField()  # Por ejemplo, 1:30:00 para 1 hora y 30 minutos
+    duracion = models.DurationField()
+    imagen = models.ImageField(upload_to='peliculas/', null=True, blank=True)  
+
 
     def __str__(self):
         return self.titulo

@@ -1,14 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Películas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .peliculas-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .pelicula-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pelicula-item:hover {
+            transform: scale(1.05);
+        }
+        .pelicula-titulo {
+            font-weight: bold;
+            font-size: 16px;
+            color: #007BFF;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        img {
+            width: 150px; /* Fija el ancho de las imágenes */
+            height: 225px; /* Fija la altura de las imágenes */
+            object-fit: cover; /* Asegura que las imágenes llenen el espacio sin distorsión */
+            border-radius: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Asegurar que el grid se adapte en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .peliculas-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .peliculas-container {
+                grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Películas</h1>
-    <ul>
+    <div class="peliculas-container">
         {% for pelicula in peliculas %}
-        <li><a href="{% url 'detalles_pelicula' pelicula.id %}">{{ pelicula.titulo }}</a></li>
+        <div class="pelicula-item">
+            <a href="{% url 'detalles_pelicula' pelicula.id %}" class="pelicula-titulo">{{ pelicula.titulo }}</a>
+            {% if pelicula.imagen %}
+            <img src="{{ pelicula.imagen.url }}" alt="{{ pelicula.titulo }}">
+            {% else %}
+            <img src="ruta/a/imagen/placeholder.jpg" alt="No image available">
+            {% endif %}
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </body>
 </html>

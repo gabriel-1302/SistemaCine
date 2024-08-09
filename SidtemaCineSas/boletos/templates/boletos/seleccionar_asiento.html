@@ -1,19 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Asiento</title>
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .screen {
+            background-color: #555;
+            margin: 20px auto;
+            padding: 10px;
+            width: 70%;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .seat {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            padding-top: 10px;
+            overflow: hidden;
+        }
+        .seat::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 25px;
+            background-color: #fff;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .seat.available {
+            background-color: #90EE90;
+        }
+        .seat.available:hover {
+            background-color: #76C76B;
+            transform: scale(1.1);
+        }
+        .seat.occupied {
+            background-color: #FF6347;
+            cursor: not-allowed;
+        }
+        .seat.available::before {
+            background-color: #90EE90;
+        }
+        .seat.occupied::before {
+            background-color: #FF6347;
+        }
+        .seat a {
+            text-decoration: none;
+            color: white;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .seat.occupied a {
+            pointer-events: none;
+            color: #fff;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .legend-item .seat {
+            width: 20px;
+            height: 20px;
+            box-shadow: none;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="javascript:history.back()">Atrás</a>
+        <a href="javascript:history.forward()">Adelante</a>
+    </div>
     <h1>Seleccionar Asiento</h1>
     <h2>{{ funcion.pelicula.titulo }} - {{ funcion.horario }}</h2>
-    <ul>
+    <div class="screen">Pantalla</div>
+    <div class="grid-container">
         {% for asiento in asientos %}
-        {% if asiento.id in asientos_ocupados %}
-        <li>Fila {{ asiento.fila }} - Asiento {{ asiento.numero }} (Ocupado)</li>
-        {% else %}
-        <li>Fila {{ asiento.fila }} - Asiento {{ asiento.numero }} <a href="{% url 'comprar_boleto' funcion.id asiento.id %}">Comprar</a></li>
-        {% endif %}
+        <div class="seat {% if asiento.id in asientos_ocupados %}occupied{% else %}available{% endif %}">
+            {% if asiento.id not in asientos_ocupados %}
+            <a href="{% url 'comprar_boleto' funcion.id asiento.id %}">F{{ asiento.fila }}-A{{ asiento.numero }}</a>
+            {% else %}
+            F{{ asiento.fila }}-A{{ asiento.numero }}
+            {% endif %}
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+    <div class="legend">
+        <div class="legend-item">
+            <div class="seat available"></div>
+            <span>Disponible</span>
+        </div>
+        <div class="legend-item">
+            <div class="seat occupied"></div>
+            <span>Ocupado</span>
+        </div>
+    </div>
 </body>
 </html>
