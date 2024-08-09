@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seleccionar Asiento</title>
+</head>
+<body>
+    <h1>Seleccionar Asiento</h1>
+    <h2>{{ funcion.pelicula.titulo }} - {{ funcion.horario }}</h2>
+    <ul>
+        {% for asiento in asientos %}
+        {% if asiento.id in asientos_ocupados %}
+        <li>Fila {{ asiento.fila }} - Asiento {{ asiento.numero }} (Ocupado)</li>
+        {% else %}
+        <li>Fila {{ asiento.fila }} - Asiento {{ asiento.numero }} <a href="{% url 'comprar_boleto' funcion.id asiento.id %}">Comprar</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

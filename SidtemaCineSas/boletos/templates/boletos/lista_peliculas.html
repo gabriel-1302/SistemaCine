@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Películas</title>
+</head>
+<body>
+    <h1>Películas</h1>
+    <ul>
+        {% for pelicula in peliculas %}
+        <li><a href="{% url 'detalles_pelicula' pelicula.id %}">{{ pelicula.titulo }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

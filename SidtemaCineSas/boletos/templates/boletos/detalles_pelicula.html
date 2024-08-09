@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ pelicula.titulo }}</title>
+</head>
+<body>
+    <h1>{{ pelicula.titulo }}</h1>
+    <p>{{ pelicula.descripcion }}</p>
+    <h2>Funciones</h2>
+    <ul>
+        {% for funcion in funciones %}
+        <li><a href="{% url 'seleccionar_asiento' funcion.id %}">{{ funcion.horario }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
