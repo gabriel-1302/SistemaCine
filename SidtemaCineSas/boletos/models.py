@@ -5,6 +5,16 @@ from django.db import models
 
 from django.db import models
 
+class PeliculaEstreno(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    duracion = models.DurationField()
+    imagen = models.ImageField(upload_to='peliculas/', null=True, blank=True)
+    fecha_estreno = models.DateField()
+
+    def __str__(self):
+        return f"{self.titulo} (Estreno: {self.fecha_estreno})"
+
 class Pelicula(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()

@@ -2,11 +2,12 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render, get_object_or_404
-from .models import Pelicula, Funcion, Asiento, Boleto
+from .models import Pelicula, Funcion, Asiento, Boleto, PeliculaEstreno
 
 def lista_peliculas(request):
+    estrenos = PeliculaEstreno.objects.all()
     peliculas = Pelicula.objects.all()
-    return render(request, 'boletos/lista_peliculas.html', {'peliculas': peliculas})
+    return render(request, 'boletos/lista_peliculas.html', {'peliculas': peliculas, 'estrenos':estrenos})
 
 def detalles_pelicula(request, pelicula_id):
     pelicula = get_object_or_404(Pelicula, id=pelicula_id)

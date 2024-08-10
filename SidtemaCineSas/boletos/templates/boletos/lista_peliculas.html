@@ -19,14 +19,13 @@
             color: #333;
             margin-bottom: 30px;
         }
-        .peliculas-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
+        .pelicula-estreno-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
         }
-        .pelicula-item {
+        .pelicula-estreno-item {
             background-color: #fff;
             padding: 15px;
             border-radius: 10px;
@@ -37,7 +36,25 @@
             flex-direction: column;
             align-items: center;
         }
-        .pelicula-item:hover {
+        .peliculas-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .pelicula-item, .pelicula-estreno-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pelicula-item:hover, .pelicula-estreno-item:hover {
             transform: scale(1.05);
         }
         .pelicula-titulo {
@@ -72,7 +89,20 @@
     </style>
 </head>
 <body>
-    <h1>Películas</h1>
+    <h1>Proximos Estrenos</h1>
+
+    <!-- Sección de Película de Estreno -->
+    <div class="peliculas-container">
+        {% for estrenos in estrenos %}
+        <div class="pelicula-item">
+            <a class="pelicula-titulo">{{ estrenos.titulo }}</a>
+            <img src="{{ estrenos.imagen.url }}" alt="{{ estrenos.titulo }}">
+            <a class="pelicula-titulo">{{ estrenos.fecha_estreno }}</a>
+        </div>
+        {% endfor %}
+    </div>
+    <h1>Cartelera</h1>
+    <!-- Sección de todas las Películas -->
     <div class="peliculas-container">
         {% for pelicula in peliculas %}
         <div class="pelicula-item">
