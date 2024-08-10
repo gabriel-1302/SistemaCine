@@ -1,8 +1,22 @@
 from django.shortcuts import render
-
+from datetime import datetime
 # Create your views here.
 from django.shortcuts import render, get_object_or_404
 from .models import Pelicula, Funcion, Asiento, Boleto, PeliculaEstreno
+
+
+def buscar_peliculas(request):
+    fecha = request.GET.get('fecha')
+    funciones = []
+
+    if fecha:
+        fecha_obj = datetime.strptime(fecha, '%Y-%m-%d').date()  # Convertimos el string a un objeto de fecha
+        funciones = Funcion.objects.filter(horario__date=fecha_obj)  # Filtramos las funciones por fecha
+
+    return render(request, 'boletos/funciones_por_fecha.html', {
+        'funciones': funciones,
+        'fecha': fecha
+    })
 
 def lista_peliculas(request):
     estrenos = PeliculaEstreno.objects.all()

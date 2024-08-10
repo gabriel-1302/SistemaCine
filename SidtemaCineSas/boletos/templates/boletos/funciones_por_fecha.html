@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones Disponibles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .funciones-container {
+            display: flex;
+            flex-direction: row;
+            /* Disposición en fila */
+            flex-wrap: wrap;
+            /* Permite el envolvimiento en varias filas */
+            gap: 20px;
+            /* Espacio entre los elementos */
+            justify-content: center;
+            /* Centra los elementos */
+        }
+
+        .funcion-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 200px;
+            /* Ajusta el ancho de los elementos */
+        }
+
+        .funcion-item:hover {
+            transform: scale(1.05);
+        }
+
+        .funcion-item img {
+            width: 100%;
+            /* Ajusta el ancho de la imagen al contenedor */
+            height: auto;
+            /* Mantiene la proporción de la imagen */
+            border-radius: 4px;
+        }
+
+        .pelicula-titulo {
+            font-weight: bold;
+            font-size: 16px;
+            color: #007BFF;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Asegurar que el contenedor se adapte en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .funciones-container {
+                flex-direction: row;
+                /* Mantener disposición en fila en pantallas más pequeñas */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .funciones-container {
+                flex-direction: column;
+                /* Cambia a disposición en columna para pantallas muy pequeñas */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Funciones disponibles el {{ fecha }}</h1>
+
+    {% if funciones %}
+    <div class="funciones-container">
+        {% for funcion in funciones %}
+        <div class="funcion-item">
+            <h2>{{ funcion.pelicula.titulo }}</h2>
+            {% if funcion.pelicula.imagen %}
+            <img src="{{ funcion.pelicula.imagen.url }}" alt="{{ funcion.pelicula.titulo }}"
+                style="width: 100%; border-radius: 4px;">
+            {% else %}
+            <img src="ruta/a/imagen/placeholder.jpg" alt="No image available" style="width: 100%; border-radius: 4px;">
+            {% endif %}
+            <p>Sala: {{ funcion.sala }}</p>
+            <p>Horario: {{ funcion.horario|date:"H:i" }}</p>
+            <a href="{% url 'seleccionar_asiento' funcion.id %}">Seleccionar Asiento</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No hay funciones disponibles para la fecha seleccionada.</p>
+    {% endif %}
+</body>
+
+</html>

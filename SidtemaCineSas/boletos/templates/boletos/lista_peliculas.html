@@ -101,6 +101,14 @@
         </div>
         {% endfor %}
     </div>
+    <div class="buscar-fecha">
+        <h2>Buscar películas por fecha</h2>
+        <form method="GET" action="{% url 'buscar_peliculas' %}">
+            <label for="fecha">Seleccione una fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
     <h1>Cartelera</h1>
     <!-- Sección de todas las Películas -->
     <div class="peliculas-container">

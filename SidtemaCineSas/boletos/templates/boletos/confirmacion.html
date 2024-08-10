@@ -72,5 +72,10 @@
         </div>
         <p>¡Gracias por tu compra! Disfruta de la película.</p>
     </div>
+    <script>
+        setTimeout(function(){
+            window.location.href = "{% url 'seleccionar_asiento' boleto.funcion.id %}";
+        }, 5000);
+    </script>
 </body>
 </html>
