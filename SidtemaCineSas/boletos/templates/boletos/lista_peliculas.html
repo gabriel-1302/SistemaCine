@@ -73,6 +73,15 @@
         a:hover {
             text-decoration: underline;
         }
+        #Encabezado {
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            width: 100%;
+        }
 
         /* Asegurar que el grid se adapte en pantallas pequeñas */
         @media (max-width: 768px) {
@@ -89,6 +98,9 @@
     </style>
 </head>
 <body>
+    <div id="Encabezado">
+        <a href="{%url 'lista_peliculas' %}"><img src="../../../media/Iconos/homesistema.png" alt="" style="width: 100px; height: auto;"></a>
+    </div>
     <h1>Proximos Estrenos</h1>
 
     <!-- Sección de Película de Estreno -->

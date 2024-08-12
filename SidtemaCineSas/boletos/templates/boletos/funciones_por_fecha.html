@@ -82,19 +82,15 @@
         a:hover {
             background-color: #0056b3;
         }
-
-        /* Asegurar que el contenedor se adapte en pantallas pequeñas */
         @media (max-width: 768px) {
             .funciones-container {
                 flex-direction: row;
-                /* Mantener disposición en fila en pantallas más pequeñas */
             }
         }
 
         @media (max-width: 480px) {
             .funciones-container {
                 flex-direction: column;
-                /* Cambia a disposición en columna para pantallas muy pequeñas */
             }
         }
     </style>
@@ -110,7 +106,7 @@
             <h2>{{ funcion.pelicula.titulo }}</h2>
             {% if funcion.pelicula.imagen %}
             <img src="{{ funcion.pelicula.imagen.url }}" alt="{{ funcion.pelicula.titulo }}"
-                style="width: 100%; border-radius: 4px;">
+                style="width: 100%; border-radius: 4px; height: 100%;">
             {% else %}
             <img src="ruta/a/imagen/placeholder.jpg" alt="No image available" style="width: 100%; border-radius: 4px;">
             {% endif %}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             align-items: center;
             height: 100vh;
         }
+
         .confirmation-container {
             background-color: #fff;
             padding: 30px;
@@ -24,17 +26,20 @@
             width: 100%;
             text-align: center;
         }
+
         h1 {
             color: #007BFF;
             font-size: 2.5em;
             margin-bottom: 20px;
         }
+
         p {
             font-size: 1.2em;
             color: #555;
             line-height: 1.6;
             margin-bottom: 30px;
         }
+
         .ticket-details {
             background-color: #f9f9f9;
             padding: 20px;
@@ -43,10 +48,12 @@
             margin-bottom: 20px;
             text-align: left;
         }
+
         .ticket-details p {
             margin: 10px 0;
             font-size: 1.1em;
         }
+
         .btn-home {
             display: inline-block;
             text-decoration: none;
@@ -57,25 +64,28 @@
             font-size: 1.2em;
             transition: background-color 0.3s ease;
         }
+
         .btn-home:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
+
 <body>
     <div class="confirmation-container">
         <h1>¡Compra Confirmada!</h1>
+        {% for boleto in boletos %}
         <div class="ticket-details">
             <p><strong>Película:</strong> {{ boleto.funcion.pelicula.titulo }}</p>
             <p><strong>Horario:</strong> {{ boleto.funcion.horario }}</p>
             <p><strong>Asiento:</strong> Fila {{ boleto.asiento.fila }}, Asiento {{ boleto.asiento.numero }}</p>
+            {% if boleto.funcion.id %}
+            {% endif %}
         </div>
+        {% endfor %}
         <p>¡Gracias por tu compra! Disfruta de la película.</p>
     </div>
-    <script>
-        setTimeout(function(){
-            window.location.href = "{% url 'seleccionar_asiento' boleto.funcion.id %}";
-        }, 5000);
-    </script>
+
 </body>
+
 </html>
