@@ -1,139 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Películas</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-        }
-        .pelicula-estreno-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 50px;
-        }
-        .pelicula-estreno-item {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .peliculas-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-        }
-        .pelicula-item, .pelicula-estreno-item {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .pelicula-item:hover, .pelicula-estreno-item:hover {
-            transform: scale(1.05);
-        }
-        .pelicula-titulo {
-            font-weight: bold;
-            font-size: 16px;
-            color: #007BFF;
-            margin-bottom: 10px;
-            text-decoration: none;
-        }
-        img {
-            width: 150px; /* Fija el ancho de las imágenes */
-            height: 225px; /* Fija la altura de las imágenes */
-            object-fit: cover; /* Asegura que las imágenes llenen el espacio sin distorsión */
-            border-radius: 10px;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        #Encabezado {
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            display: flex;
-            flex-direction: row;
-            justify-content: end;
-            width: 100%;
-        }
+      /* Importar fuentes elegantes */
+      @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
 
-        /* Asegurar que el grid se adapte en pantallas pequeñas */
-        @media (max-width: 768px) {
-            .peliculas-container {
-                grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
-            }
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        width: 99%;
+        color: #333333;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        @media (max-width: 480px) {
-            .peliculas-container {
-                grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
-            }
-        }
+      header {
+        width: 100%;
+        background-color: #007bff;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .titulo-header {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .acceder-boton {
+        background-color: white;
+        color: #333333;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background-color 0.3s ease;
+      }
+
+      .acceder-boton:hover {
+        background-color: #0056b3;
+      }
+
+      .buscar-fecha-header {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .peliculas-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        width: 100%;
+        max-width: 1200px;
+        justify-content: center;
+      }
+
+      .pelicula-item,
+      .pelicula-estreno-item {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pelicula-item:hover,
+      .pelicula-estreno-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .pelicula-titulo {
+        font-weight: bold;
+        font-size: 18px;
+        color: #007bff;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        text-decoration: none;
+      }
+
+      img {
+        width: 180px;
+        height: 270px;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      img:hover {
+        transform: scale(1.05);
+      }
     </style>
-</head>
-<body>
-    <div id="Encabezado">
-        <a href="{%url 'lista_peliculas' %}"><img src="../../../media/Iconos/homesistema.png" alt="" style="width: 100px; height: auto;"></a>
-    </div>
+  </head>
+  <body>
+    <header>
+      <div class="buscar-fecha-header">
+        <form method="GET" action="{% url 'buscar_peliculas' %}">
+          <label for="fecha">Buscar por fecha:</label>
+          <input
+            type="date"
+            id="fecha"
+            name="fecha"
+            style="
+              padding: 5px 10px;
+              border-radius: 5px;
+              border: 1px solid #ccc;
+            "
+          />
+          <button type="submit" class="acceder-boton">Buscar</button>
+        </form>
+      </div>
+      <div class="titulo-header">CINESAS</div>
+      <div>
+        <a
+          href="http://127.0.0.1:8000/admin/login/?next=/admin/"
+          class="acceder-boton"
+          >Acceder</a
+        >
+      </div>
+    </header>
+
     <h1>Proximos Estrenos</h1>
 
     <!-- Sección de Película de Estreno -->
     <div class="peliculas-container">
-        {% for estrenos in estrenos %}
-        <div class="pelicula-item">
-            <a class="pelicula-titulo">{{ estrenos.titulo }}</a>
-            <img src="{{ estrenos.imagen.url }}" alt="{{ estrenos.titulo }}">
-            <a class="pelicula-titulo">{{ estrenos.fecha_estreno }}</a>
-        </div>
-        {% endfor %}
-    </div>
-    <div class="buscar-fecha">
-        <h2>Buscar películas por fecha</h2>
-        <form method="GET" action="{% url 'buscar_peliculas' %}">
-            <label for="fecha">Seleccione una fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
-            <button type="submit">Buscar</button>
-        </form>
+      {% for estrenos in estrenos %}
+      <div class="pelicula-item">
+        <a class="pelicula-titulo">{{ estrenos.titulo }}</a>
+        <img src="{{ estrenos.imagen.url }}" alt="{{ estrenos.titulo }}" />
+        <a class="pelicula-titulo">{{ estrenos.fecha_estreno }}</a>
+      </div>
+      {% endfor %}
     </div>
     <h1>Cartelera</h1>
     <!-- Sección de todas las Películas -->
     <div class="peliculas-container">
-        {% for pelicula in peliculas %}
-        <div class="pelicula-item">
-            <a href="{% url 'detalles_pelicula' pelicula.id %}" class="pelicula-titulo">{{ pelicula.titulo }}</a>
-            {% if pelicula.imagen %}
-            <img src="{{ pelicula.imagen.url }}" alt="{{ pelicula.titulo }}">
-            {% else %}
-            <img src="ruta/a/imagen/placeholder.jpg" alt="No image available">
-            {% endif %}
-        </div>
-        {% endfor %}
+      {% for pelicula in peliculas %}
+      <div class="pelicula-item">
+        <a
+          href="{% url 'detalles_pelicula' pelicula.id %}"
+          class="pelicula-titulo"
+          >{{ pelicula.titulo }}</a
+        >
+        {% if pelicula.imagen %}
+        <img src="{{ pelicula.imagen.url }}" alt="{{ pelicula.titulo }}" />
+        {% else %}
+        <img src="ruta/a/imagen/placeholder.jpg" alt="No image available" />
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
-</body>
+  </body>
 </html>

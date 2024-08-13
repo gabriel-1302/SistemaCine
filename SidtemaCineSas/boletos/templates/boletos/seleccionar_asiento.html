@@ -1,204 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seleccionar Asiento</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        color: #333333;
+        display: flex;
+        width: 99%;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        h1,
-        h2 {
-            color: #333;
-        }
+      header {
+        width: 100%;
+        background-color: #007bff;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+      }
 
-        .screen {
-            background-color: #555;
-            margin: 20px auto;
-            padding: 10px;
-            width: 70%;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        }
+      .titulo-header {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-            padding: 20px;
-        }
+      .acceder-boton {
+        background-color: white;
+        color: #333333;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background-color 0.3s ease;
+      }
 
-        .seat {
-            position: relative;
-            width: 50px;
-            height: 50px;
-            background-color: #fff;
-            border-radius: 15px 15px 0 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            padding-top: 10px;
-            overflow: hidden;
-        }
+      .acceder-boton:hover {
+        background-color: #0056b3;
+      }
+      .navbar {
+        padding-left: 20px;
+        display: flex;
+        gap: 20px;
+      }
 
-        .seat::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 25px;
-            background-color: #fff;
-            border-radius: 15px 15px 0 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
+      .screen {
+        background-color: #333;
+        margin: 20px auto;
+        padding: 10px;
+        width: 50%;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      }
 
-        .seat.available {
-            background-color: #90EE90;
-        }
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+        padding: 20px;
+      }
 
-        .seat.available:hover {
-            background-color: #76C76B;
-            transform: scale(1.1);
-        }
+      .seat {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        border-radius: 15px 15px 0 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        padding-top: 10px;
+        overflow: hidden;
+      }
 
-        .seat.occupied {
-            background-color: #FF6347;
-            cursor: not-allowed;
-        }
+      .seat.available {
+        background-color: #90ee90;
+      }
 
-        .seat.available::before {
-            background-color: #90EE90;
-        }
+      .seat.available:hover {
+        background-color: #76c76b;
+        transform: scale(1.1);
+      }
 
-        .seat.occupied::before {
-            background-color: #FF6347;
-        }
+      .seat.occupied {
+        background-color: #ff6347;
+        cursor: not-allowed;
+      }
 
-        .seat a {
-            text-decoration: none;
-            color: white;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .seat a {
+        text-decoration: none;
+        color: black;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .seat.occupied a {
-            pointer-events: none;
-            color: #fff;
-        }
+      .legend {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 20px;
+      }
 
-        .legend {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 20px;
-        }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+      .legend-item .seat {
+        width: 20px;
+        height: 20px;
+        box-shadow: none;
+        margin: 0;
+      }
+      h2 {
+        background-color: white;
+        color: #333333;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 700;
+      }
 
-        .legend-item .seat {
-            width: 20px;
-            height: 20px;
-            box-shadow: none;
-            margin: 0;
-        }
-
-        #Encabezado {
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .seat.selected {
-            background-color: yellow;
-        }
+      .seat.selected {
+        background-color: yellow;
+      }
+      .container {
+        max-width: 800px;
+        width: 100%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .content {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
     </style>
     <script>
-        function seleccionarAsiento(asientoId) {
-            var asiento = document.getElementById('asiento-' + asientoId);
-            if (asiento.classList.contains('selected')) {
-                asiento.classList.remove('selected');
-            } else {
-                asiento.classList.add('selected');
-            }
+      function seleccionarAsiento(asientoId) {
+        var asiento = document.getElementById("asiento-" + asientoId);
+        if (asiento.classList.contains("selected")) {
+          asiento.classList.remove("selected");
+        } else {
+          asiento.classList.add("selected");
         }
+      }
+    </script>
+  </head>
 
-    </script>
-</head>
-
-<body>
-    <div class="navbar">
-        <div id="Encabezado">
-            <a href="javascript:history.back()">Atrás</a>
-            <!--<a href="javascript:history.forward()">Adelante</a>-->
-            <a href="{% url 'lista_peliculas' %}"><img src="../../../media/Iconos/homesistema.png" alt=""
-                    style="width: 100px; height: auto;"></a>
-        </div>
-    </div>
+  <body>
+    <header>
+      <div class="navbar">
+        <a href="http://127.0.0.1:8000/" class="acceder-boton">Inicio</a>
+        <a href="javascript:history.back()" class="acceder-boton">Atrás</a>
+      </div>
+      <div class="titulo-header">Seleccionar asientos</div>
+      <a
+        href="http://127.0.0.1:8000/admin/login/?next=/admin/"
+        class="acceder-boton"
+        >Acceder</a
+      >
+    </header>
     <h1>Seleccionar Asiento</h1>
     <h2>{{ funcion.pelicula.titulo }} - {{ funcion.horario }}</h2>
     <div class="screen">Pantalla</div>
     <div class="grid-container">
-        {% for asiento in asientos %}
-        <div class="seat {% if asiento.id in asientos_ocupados %}occupied{% else %}available{% endif %}"
-            id="asiento-{{ asiento.id }}" onclick="seleccionarAsiento('{{ asiento.id }}')">
-            {% if asiento.id not in asientos_ocupados %}
-            <a href="{% url 'comprar_boleto' funcion.id asiento.id %}">F{{ asiento.fila }}-A{{ asiento.numero }}</a>
-            {% else %}
-            F{{ asiento.fila }}-A{{ asiento.numero }}
-            {% endif %}
-        </div>
-        {% endfor %}
+      {% for asiento in asientos %}
+      <div
+        class="seat {% if asiento.id in asientos_ocupados %}occupied{% else %}available{% endif %}"
+        id="asiento-{{ asiento.id }}"
+        {%
+        if
+        asiento.id
+        not
+        in
+        asientos_ocupados
+        %}
+        onclick="seleccionarAsiento('{{ asiento.id }}')"
+        {%
+        endif
+        %}
+      >
+        {% if asiento.id not in asientos_ocupados %}
+        <a href="{% url 'comprar_boleto' funcion.id asiento.id %}"
+          >F{{ asiento.fila }}-A{{ asiento.numero }}</a
+        >
+        {% else %} F{{ asiento.fila }}-A{{ asiento.numero }} {% endif %}
+      </div>
+      {% endfor %}
     </div>
     <div class="legend">
-        <div class="legend-item">
-            <div class="seat available"></div>
-            <span>Disponible</span>
-        </div>
-        <div class="legend-item">
-            <div class="seat occupied"></div>
-            <span>Ocupado</span>
-        </div>
+      <div class="legend-item">
+        <div class="seat available"></div>
+        <span>Disponible</span>
+      </div>
+      <div class="legend-item">
+        <div class="seat occupied"></div>
+        <span>Ocupado</span>
+      </div>
     </div>
 
     <!-- Botón para confirmar compra -->
 
-   <!--<div class="confirm-purchase">
+    <!--<div class="confirm-purchase">
         <form action="{% url 'confirmar_compra' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="btn-confirm">Confirmar Compra</button>
         </form>
     </div>
     -->
-
-</body>
-
+  </body>
 </html>
