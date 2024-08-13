@@ -198,29 +198,19 @@
     <h2>{{ funcion.pelicula.titulo }} - {{ funcion.horario }}</h2>
     <div class="screen">Pantalla</div>
     <div class="grid-container">
-      {% for asiento in asientos %}
-      <div
-        class="seat {% if asiento.id in asientos_ocupados %}occupied{% else %}available{% endif %}"
-        id="asiento-{{ asiento.id }}"
-        {%
-        if
-        asiento.id
-        not
-        in
-        asientos_ocupados
-        %}
-        onclick="seleccionarAsiento('{{ asiento.id }}')"
-        {%
-        endif
-        %}
-      >
-        {% if asiento.id not in asientos_ocupados %}
-        <a href="{% url 'comprar_boleto' funcion.id asiento.id %}"
-          >F{{ asiento.fila }}-A{{ asiento.numero }}</a
-        >
-        {% else %} F{{ asiento.fila }}-A{{ asiento.numero }} {% endif %}
-      </div>
-      {% endfor %}
+        {% for asiento in asientos %}
+        <div class="seat {% if asiento.id in asientos_ocupados %}occupied{% else %}available{% endif %}"
+             id="asiento-{{ asiento.id }}"
+             {% if asiento.id not in asientos_ocupados %}
+             onclick="seleccionarAsiento('{{ asiento.id }}')"
+             {% endif %}>
+            {% if asiento.id not in asientos_ocupados %}
+                <a href="{% url 'comprar_boleto' funcion.id asiento.id %}">F{{ asiento.fila }}-A{{ asiento.numero }}</a>
+            {% else %}
+                F{{ asiento.fila }}-A{{ asiento.numero }}
+            {% endif %}
+        </div>
+    {% endfor %}
     </div>
     <div class="legend">
       <div class="legend-item">
@@ -234,13 +224,14 @@
     </div>
 
     <!-- Botón para confirmar compra -->
-
-    <!--<div class="confirm-purchase">
+     <!--
+    <div class="confirm-purchase">
         <form action="{% url 'confirmar_compra' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="btn-confirm">Confirmar Compra</button>
         </form>
     </div>
-    -->
+-->
+   
   </body>
 </html>

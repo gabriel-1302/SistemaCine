@@ -30,6 +30,8 @@ def lista_peliculas(request):
 def detalles_pelicula(request, pelicula_id):
     pelicula = get_object_or_404(Pelicula, id=pelicula_id)
     funciones = Funcion.objects.filter(pelicula=pelicula)
+    request.session['boletos_seleccionados'] = []
+    request.session.modified = True
     return render(request, 'boletos/detalles_pelicula.html', {'pelicula': pelicula, 'funciones': funciones})
 
 def seleccionar_asiento(request, funcion_id):
@@ -44,12 +46,13 @@ from django.http import HttpResponse
 def comprar_boleto(request, funcion_id, asiento_id):
     if 'boletos_seleccionados' not in request.session:
         request.session['boletos_seleccionados'] = []
-    
-    # Añadir el asiento a la lista de boletos seleccionados en la sesión
-    if {'funcion_id': funcion_id, 'asiento_id': asiento_id} not in request.session['boletos_seleccionados']:
-        request.session['boletos_seleccionados'].append({'funcion_id': funcion_id, 'asiento_id': asiento_id})
-        request.session.modified = True
-    
+    boleto = {'funcion_id': funcion_id, 'asiento_id': asiento_id}
+    if boleto in request.session['boletos_seleccionados']:
+        request.session['boletos_seleccionados'].remove(boleto)
+    else:
+        request.session['boletos_seleccionados'].append(boleto)
+    request.session.modified = True
+
     return HttpResponse(status=204)
 
 
