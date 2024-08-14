@@ -1,91 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Confirmación de Compra</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-        .confirmation-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-        }
+      .confirmation-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+      }
 
-        h1 {
-            color: #007BFF;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
+      h1 {
+        color: #007bff;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
 
-        p {
-            font-size: 1.2em;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+      p {
+        font-size: 1.2em;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
 
-        .ticket-details {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            text-align: left;
-        }
+      .ticket-details {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        text-align: left;
+      }
 
-        .ticket-details p {
-            margin: 10px 0;
-            font-size: 1.1em;
-        }
+      .ticket-details p {
+        margin: 10px 0;
+        font-size: 1.1em;
+      }
 
-        .btn-home {
-            display: inline-block;
-            text-decoration: none;
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1.2em;
-            transition: background-color 0.3s ease;
-        }
+      .btn-home {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease;
+      }
 
-        .btn-home:hover {
-            background-color: #0056b3;
-        }
+      .btn-home:hover {
+        background-color: #0056b3;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="confirmation-container">
-        <h1>¡Compra Confirmada!</h1>
-        {% for boleto in boletos %}
-        <div class="ticket-details">
-            <p><strong>Película:</strong> {{ boleto.funcion.pelicula.titulo }}</p>
-            <p><strong>Horario:</strong> {{ boleto.funcion.horario }}</p>
-            <p><strong>Asiento:</strong> Fila {{ boleto.asiento.fila }}, Asiento {{ boleto.asiento.numero }}</p>
-            {% if boleto.funcion.id %}
-            {% endif %}
-        </div>
-        {% endfor %}
-        <p>¡Gracias por tu compra! Disfruta de la película.</p>
+      <h1>¡Compra Confirmada!</h1>
+      {% for boleto in boletos %}
+      <div class="ticket-details">
+        <p><strong>Película:</strong> {{ boleto.funcion.pelicula.titulo }}</p>
+        <p><strong>Horario:</strong> {{ boleto.funcion.horario }}</p>
+        <p>
+          <strong>Asiento:</strong> Fila {{ boleto.asiento.fila }}, Asiento {{
+          boleto.asiento.numero }}
+        </p>
+        {% if boleto.funcion.id %} {% endif %}
+      </div>
+      {% endfor %}
+      <p>¡Gracias por tu compra! Disfruta de la película.</p>
     </div>
-
-</body>
-
+  </body>
 </html>
